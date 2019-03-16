@@ -1,55 +1,42 @@
 'use strict';
 (function(){ 
 
-	var modalOneClick = document.querySelector('#modal-one-click');
-	var modalOneSelector = document.querySelector('#modal-one');
-
-	modalOneClick.addEventListener('click', showModal);
-
-	var showModal = function(event){
-		event.preventDefault();
-		for(var i = 0; i < modalLinks.length; i++){
-			modalLinks[i].addEventListener('click', hideModal);
-		}
-		modalOneSelector.classList.add('show');
-		document.querySelector('#modal-overlay').classList.add('show');
-		console.log('click modal one');
-	};
-	
-
 	
 	var modalLinks = document.querySelectorAll('.show-modal');
+	var closeButtons = document.querySelectorAll('.close');
+	var modals = document.querySelectorAll('.modal');
+	var modalOverlay = document.querySelector('#modal-overlay');
 	
-	for(var i = 0; i < modalLinks.length; i++){
-		modalLinks[i].addEventListener('click', showModal);
+	modalOverlay.addEventListener('click', hideModal);
+
+	var showModal = function(event) {
+		event.preventDefault();
+		var idAll = modalLinks.getAttribute('href');
+		idAll.classList.remove('.show');
+		var id = event.target.getAttribute('href');
+		document.querySelector(id).classList.toggle('.show');	
+		modalOverlay.classList.add('.show');
 	}
-
-
 
 	var hideModal = function(event){
 		event.preventDefault();
-		document.querySelector('#modal-overlay').classList.remove('show');
+		modalOverlay.classList.remove('.show');
 	};
 	
-	var closeButtons = document.querySelectorAll('.modal .close');
+	
+
+	for(var i = 0; i < modalLinks.length; i++){
+		modalLinks[i].addEventListener('click', showModal);
+	}
 	
 	for(var i = 0; i < closeButtons.length; i++){
 		closeButtons[i].addEventListener('click', hideModal);
 	}
-	
-
-	
-	document.querySelector('#modal-overlay').addEventListener('click', hideModal);
-	
-
-	
-	var modals = document.querySelectorAll('.modal');
 	
 	for(var i = 0; i < modals.length; i++){
 		modals[i].addEventListener('click', function(event){
 			event.stopPropagation();
 		});
 	}
-	
 	
 })(); 
