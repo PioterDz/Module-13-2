@@ -11,16 +11,17 @@
 
 	var showModal = function(event) {
 		event.preventDefault();
-		var idAll = modalLinks.getAttribute('href');
-		idAll.classList.remove('.show');
 		var id = event.target.getAttribute('href');
-		document.querySelector(id).classList.toggle('.show');	
-		modalOverlay.classList.add('.show');
+		document.querySelector(id).classList.toggle('show');	
+		modalOverlay.classList.add('show');
 	}
 
 	var hideModal = function(event){
 		event.preventDefault();
-		modalOverlay.classList.remove('.show');
+		modalOverlay.classList.remove('show');
+		for(var i = 0; i < modals.length; i++) {
+			modals[i].classList.remove('show');
+		}
 	};
 	
 	
